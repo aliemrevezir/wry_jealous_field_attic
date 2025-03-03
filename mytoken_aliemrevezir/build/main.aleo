@@ -61,8 +61,8 @@ finalize transfer_private:
     assert.eq r2 r3;
 
 function initialize:
-    assert.eq self.caller aleo1xdfm5f7kuze2lz5nfma6tgq7h3klfl94zkk7yk9yf2dmy68muqxsn2djm0;
-    call token_registry.aleo/register_token 71619063553950105623531field 71619063553950105623531u128 71619063553950105623531u128 6u8 1_000_000_000_000u128 true mytoken_aliemrevezir.aleo into r0;
+    assert.eq self.caller aleo19ln8l3u97f9dqndn8zwf0z62790nzh4k3w2pr5lv5anjceuckvqq5lwvv6;
+    call token_registry.aleo/register_token 71619063553320105623531field 71619063553950105623531u128 71619063553950105623531u128 6u8 1_000_000_000_000u128 true mytoken_aliemrevezir.aleo into r0;
     async initialize r0 into r1;
     output r1 as mytoken_aliemrevezir.aleo/initialize.future;
 
@@ -71,8 +71,8 @@ finalize initialize:
     await r0;
 
 function mint_private:
-    assert.eq self.caller aleo1xdfm5f7kuze2lz5nfma6tgq7h3klfl94zkk7yk9yf2dmy68muqxsn2djm0;
-    call token_registry.aleo/mint_private 71619063553950105623531field aleo1xdfm5f7kuze2lz5nfma6tgq7h3klfl94zkk7yk9yf2dmy68muqxsn2djm0 1_000_000_000_000u128 true 4294967295u32 into r0 r1;
+    assert.eq self.caller aleo19ln8l3u97f9dqndn8zwf0z62790nzh4k3w2pr5lv5anjceuckvqq5lwvv6;
+    call token_registry.aleo/mint_private 71619063553320105623531field aleo19ln8l3u97f9dqndn8zwf0z62790nzh4k3w2pr5lv5anjceuckvqq5lwvv6 1_000_000_000_000u128 true 4294967295u32 into r0 r1;
     async mint_private r1 into r2;
     output r0 as token_registry.aleo/Token.record;
     output r2 as mytoken_aliemrevezir.aleo/mint_private.future;
@@ -87,6 +87,6 @@ finalize mint_private:
 
 function issue_limit:
     input r0 as address.private;
-    assert.eq self.caller aleo1xdfm5f7kuze2lz5nfma6tgq7h3klfl94zkk7yk9yf2dmy68muqxsn2djm0;
+    assert.eq self.caller aleo19ln8l3u97f9dqndn8zwf0z62790nzh4k3w2pr5lv5anjceuckvqq5lwvv6;
     cast r0 0u128 0u32 into r1 as SpendLimit.record;
     output r1 as SpendLimit.record;

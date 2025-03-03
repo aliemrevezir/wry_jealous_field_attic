@@ -8,7 +8,8 @@ import {
   NetworkRecordProvider,
 } from "@provablehq/sdk";
 import { expose, proxy } from "comlink";
-import {ZPassSDK} from "zpass-sdk";
+import { ZPassSDK } from "zpass-sdk";
+
 
 await initThreadPool();
 
@@ -18,24 +19,22 @@ async function testUsage(privateKey, txId, input, min, inputs, index) {
     host: "https://api.explorer.provable.com/v1",
     network: "testnet"
   });
-
-  const record = await zpass.getZPassRecord(txId);
-  console.log(record)
+  const record = await zpass.getRecord(txId);
+  console.log(record);
 
   const proof = await zpass.getMerkleProof(inputs, index);
-  const proofString = `[${proof.join(",")}]`;
-  
-
+  const proofString = `[${proof.join(",")}]`;	
+  console.log(proofString);
   const resTxId = await zpass.proveOnChain({
-    programName: "zpass_usage_test_8.aleo",
+    deployProgram: "zpass_usage_test_8.aleo",
     functionName: "verify_zpass",
-    inputs: [record, proofString, input, min],
+    inputs: [record, proof, input, min],
     fee: 0.1,
     privateFee: false
-  })
-
+  });
   return resTxId;
 }
+
 
 async function issueZPass(privateKey, inputs) {
   const zpass = new ZPassSDK({
@@ -43,23 +42,23 @@ async function issueZPass(privateKey, inputs) {
     host: "https://api.explorer.provable.com/v1",
     network: "testnet"
   });
-
-  const account = new Account({privateKey});
+  const account = new Account({ privateKey });
   const issuer = account.address().to_string();
-
   const merkleRoot = await zpass.getMerkleRoot(inputs);
   const leavesHashes = await zpass.getLeavesHashes(inputs);
   const leavesHashesString = `[${leavesHashes.join(",")}]`;
-
   const sig = await zpass.signMerkleRoot(merkleRoot);
-  
-  const txId = await zpass.issueZPass({
+
+
+  const txID = await zpass.issueZPass({
     programName: "zpass_merkle_8.aleo",
     functionName: "issue",
     inputs: [sig, leavesHashesString, issuer],
     fee: 0.1,
-    privateFee: false
-  })
+    privateFee: false,
+
+  });
+  return txID;
 }
 
 async function localProgramExecution(program, aleoFunction, inputs) {
@@ -119,5 +118,5 @@ async function deployProgram(program) {
   return tx_id;
 }
 
-const workerMethods = { localProgramExecution, getPrivateKey, deployProgram, issueZPass, testUsage };
+const workerMethods = { localProgramExecution, getPrivateKey, deployProgram, issueZPass};
 expose(workerMethods);

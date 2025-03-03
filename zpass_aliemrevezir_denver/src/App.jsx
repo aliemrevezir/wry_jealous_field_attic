@@ -6,43 +6,39 @@ import helloworld_program from "../helloworld/build/main.aleo?raw";
 import { AleoWorker } from "./workers/AleoWorker.js";
 import { Account } from "@provablehq/sdk";
 
-
 const aleoWorker = AleoWorker();
 function App() {
   const [count, setCount] = useState(0);
   const [account, setAccount] = useState(null);
   const [executing, setExecuting] = useState(false);
   const [deploying, setDeploying] = useState(false);
-
   const testUsage = async () => {
-    const privateKey = "APrivateKey1zkp2sEpZA2oSY8AXvFmQC5LpDdiSCbTCA8naitdEQiTHJxr"
-    const account = new Account({privateKey})
+    const privateKey = "APrivateKey1zkpHWg8Nkbzk4mQcCiwDujvNqWtSJwoSWN411fb6eEJCabF";
+    const account = new Account({ privateKey });
     const address = account.address().to_string();
     const inputs = [
       address,
       "1234u128",
-      "5475912i32"
-    ]
-
-    const txId = "at1yksf9d93w8z2a8avjf3gzspyzxday0257v6w2fz80wmhmk7a45xssyla68";
-
-    const resTxId = await aleoWorker.testUsage(privateKey, txId, inputs[1], "100u128", inputs, 1);
-    console.log("Tx ID:", resTxId)
-
+      "547548i32"
+    ];
+    const txId = "at1av3rsgxu2ax7gg2kqs0h424splfzneaw0fj06aua2qdl8ylf8yzs23g73a";
+    const resTxId = aleoWorker.testUsage(privateKey, txId, inputs[1], "100u128", inputs, 1);
+    console.log("Transaction ID: " + resTxId);
   }
 
+
   const issueZPass = async () => {
-    const privateKey = "APrivateKey1zkp2sEpZA2oSY8AXvFmQC5LpDdiSCbTCA8naitdEQiTHJxr"
-    const account = new Account({privateKey})
+    const privateKey = "APrivateKey1zkpHWg8Nkbzk4mQcCiwDujvNqWtSJwoSWN411fb6eEJCabF";
+    const account = new Account({ privateKey });
     const address = account.address().to_string();
     const inputs = [
       address,
       "1234u128",
-      "5475912i32"
-    ]
+      "547548i32"
 
-    const txId = await aleoWorker.issueZPass(privateKey, inputs);
-    console.log("TX ID:", txId)
+    ];
+    const txID = await aleoWorker.issueZPass(privateKey, inputs);
+    console.log("Transaction ID: " + txID);
   }
 
   const generateAccount = async () => {
@@ -98,16 +94,20 @@ function App() {
               : `Click to generate account`}
           </button>
         </p>
+
         <p>
           <button onClick={issueZPass}>
-            {`Issue ZPass`}
+            {"Issue ZPass"}
           </button>
         </p>
+
         <p>
           <button onClick={testUsage}>
-            {`Test ZPass`}
+            {"Test Usage"}
           </button>
         </p>
+
+
         <p>
           <button disabled={executing} onClick={execute}>
             {executing

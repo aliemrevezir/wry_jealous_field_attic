@@ -2,8 +2,8 @@ import credits.aleo;
 import token_registry.aleo;
 
 program mytoken_aliemrevezir.aleo {
-  const my_token_id: field = 71619063553950105623531field;
-  const ADMIN_ADDRESS: address = aleo1xdfm5f7kuze2lz5nfma6tgq7h3klfl94zkk7yk9yf2dmy68muqxsn2djm0;
+  const my_token_id: field = 71619063553320105623531field;
+  const ADMIN_ADDRESS: address = aleo19ln8l3u97f9dqndn8zwf0z62790nzh4k3w2pr5lv5anjceuckvqq5lwvv6;
   const MAX_SUPPLY: u128 = 1_000_000_000_000u128;
   const BLOCKS_IN_A_DAY: u32 = 28_500u32;
   const MAX_SPEND_PER_DAY: u128 = 5_000_000_000u128;
