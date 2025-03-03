@@ -3,3 +3,7 @@ outputs/
 *.avm
 *.prover
 *.verifier
+dapp_aliemrevezir/node_modules/
+mytoken_aliemrevezir/.env
+tokenvest_aliemrevezir/.env
+auction_aliemrevezir/.env

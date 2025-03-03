@@ -1,6 +1,6 @@
 {
-    "program": "auction_aliemrevezir.aleo",
-    "version": "0.0.0",
-    "description": "",
-    "license": "MIT"
+  "program": "auction_aliemrevezir.aleo",
+  "version": "0.1.0",
+  "description": "A Leo-based auction program where participants place bids, and the auction runner selects the highest bid. The winner's ownership is transferred upon completion.",
+  "license": "MIT"
 }
